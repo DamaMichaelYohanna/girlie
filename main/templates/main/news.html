@@ -144,7 +144,7 @@ Child | News Update {% endblock %} {% block content %}
               <div class="news-block-title mb-2">
                 <h6>
                   <a href="/news/{{recent.slug}}" class="news-block-title-link"
-                    >{{recent.title}}</a
+                    >{{recent.title|truncatewords:2}}</a
                   >
                 </h6>
               </div>
@@ -152,14 +152,14 @@ Child | News Update {% endblock %} {% block content %}
               <div class="news-block-date">
                 <p>
                   <i class="bi-calendar4 custom-icon me-1"></i>
-                  {{recent.date}}
+                  October 16, 2036
                 </p>
               </div>
             </div>
           </div>
           {% endfor %}
 
-          <div class="category-block d-flex flex-column">
+          <!-- <div class="category-block d-flex flex-column">
             <h5 class="mb-3">Categories</h5>
 
             <a href="#" class="category-block-link">
@@ -186,9 +186,9 @@ Child | News Update {% endblock %} {% block content %}
               Clothing Donation
               <span class="badge">20</span>
             </a>
-          </div>
+          </div> -->
 
-          <div class="tags-block">
+          <!-- <div class="tags-block">
             <h5 class="mb-3">Tags</h5>
 
             <a href="#" class="tags-block-link"> Donation </a>
@@ -204,7 +204,7 @@ Child | News Update {% endblock %} {% block content %}
             <a href="#" class="tags-block-link"> Poverty </a>
 
             <a href="#" class="tags-block-link"> Clean Water </a>
-          </div>
+          </div> -->
 
           <form
             class="custom-form subscribe-form"
