@@ -21,7 +21,7 @@ Child | News details {% endblock %} {% block content %}
           <div class="news-block">
             <div class="news-block-top">
               <img
-                src="images/news/medium-shot-volunteers-with-clothing-donations.jpg"
+                src="{{news.image.url}}"
                 class="news-image img-fluid"
                 alt=""
               />
@@ -38,55 +38,37 @@ Child | News details {% endblock %} {% block content %}
                 <div class="news-block-date">
                   <p>
                     <i class="bi-calendar4 custom-icon me-1"></i>
-                    October 12, 2036
+                    {{news.date}}
                   </p>
                 </div>
 
                 <div class="news-block-author mx-5">
                   <p>
                     <i class="bi-person custom-icon me-1"></i>
-                    By Admin
+                    By {{news.posted_by}}
                   </p>
                 </div>
 
                 <div class="news-block-comment">
                   <p>
                     <i class="bi-chat-left custom-icon me-1"></i>
-                    48 Comments
+                    {{comments_count}} Comment(s)
                   </p>
                 </div>
               </div>
 
               <div class="news-block-title mb-2">
                 <h4>{{news.title}}</h4>
-                {{news}}
               </div>
 
               <div class="news-block-body">
-                <p>
-                  <strong>Lorem Ipsum</strong> dolor sit amet, consectetur
-                  adipsicing kengan omeg kohm tokito Professional charity theme
-                  based on Bootstrap
-                </p>
-
-                <p>
-                  <strong>Sed leo</strong> nisl, This is a Bootstrap 5.2.2 CSS
-                  template for charity organization websites. You can feel free
-                  to use it. Please tell your friends about TemplateMo website.
-                  Thank you.
-                </p>
-
-                <blockquote>
-                  Sed leo nisl, posuere at molestie ac, suscipit auctor mauris.
-                  Etiam quis metus elementum, tempor risus vel, condimentum
-                  orci.
-                </blockquote>
+                <p>{{news.body}}</p>
               </div>
 
               <div class="row mt-5 mb-4">
                 <div class="col-lg-6 col-12 mb-4 mb-lg-0">
                   <img
-                    src="images/news/africa-humanitarian-aid-doctor.jpg"
+                    src="{% static 'main/images/news/africa-humanitarian-aid-doctor.jpg' %}"
                     class="news-detail-image img-fluid"
                     alt=""
                   />
@@ -94,21 +76,12 @@ Child | News details {% endblock %} {% block content %}
 
                 <div class="col-lg-6 col-12">
                   <img
-                    src="images/news/close-up-happy-people-working-together.jpg"
+                    src="{% static 'main/images/news/close-up-happy-people-working-together.jpg' %}"
                     class="news-detail-image img-fluid"
                     alt=""
                   />
                 </div>
               </div>
-
-              <p>
-                You are not allowed to redistribute this template ZIP file on
-                any other template collection website. Please
-                <a href="https://templatemo.com/contact" target="_blank"
-                  >contact TemplateMo</a
-                >
-                for more information.
-              </p>
 
               <div
                 class="social-share border-top mt-5 py-4 d-flex flex-wrap align-items-center"
@@ -131,21 +104,18 @@ Child | News details {% endblock %} {% block content %}
                   <a href="#" class="social-icon-link bi-envelope"></a>
                 </div>
               </div>
-
+              {% for comment in comments %}
               <div class="author-comment d-flex mt-3 mb-4">
                 <img
-                  src="images/avatar/studio-portrait-emotional-happy-funny.jpg"
+                  src="{% static 'main/images/avatar/studio-portrait-emotional-happy-funny.jpg' %}"
                   class="img-fluid avatar-image"
                   alt=""
                 />
 
                 <div class="author-comment-info ms-3">
-                  <h6 class="mb-1">Jack</h6>
+                  <h6 class="mb-1">{{comment.user}}</h6>
 
-                  <p class="mb-0">
-                    Kind Heart Charity is the most supportive organization. This
-                    is Bootstrap 5 HTML CSS template for everyone. Thank you.
-                  </p>
+                  <p class="mb-0">{{comment.comment}}</p>
 
                   <div class="d-flex mt-2">
                     <a href="#" class="author-comment-link me-3">Like</a>
@@ -154,74 +124,29 @@ Child | News details {% endblock %} {% block content %}
                   </div>
                 </div>
               </div>
-
-              <div class="author-comment d-flex ms-5 ps-3">
-                <img
-                  src="images/avatar/pretty-blonde-woman-wearing-white-t-shirt.jpg"
-                  class="img-fluid avatar-image"
-                  alt=""
-                />
-
-                <div class="author-comment-info ms-3">
-                  <h6 class="mb-1">Daisy</h6>
-
-                  <p class="mb-0">
-                    Sed leo nisl, posuere at molestie ac, suscipit auctor
-                    mauris. Etiam quis metus elementum, tempor risus vel,
-                    condimentum orci
-                  </p>
-
-                  <div class="d-flex mt-2">
-                    <a href="#" class="author-comment-link me-3">Like</a>
-
-                    <a href="#" class="author-comment-link">Reply</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="author-comment d-flex mt-3 mb-4">
-                <img
-                  src="images/avatar/portrait-young-redhead-bearded-male.jpg"
-                  class="img-fluid avatar-image"
-                  alt=""
-                />
-
-                <div class="author-comment-info ms-3">
-                  <h6 class="mb-1">Wilson</h6>
-
-                  <p class="mb-0">
-                    Lorem Ipsum dolor sit amet, consectetur adipsicing kengan
-                    omeg kohm tokito Professional charity theme based on
-                    Bootstrap
-                  </p>
-
-                  <div class="d-flex mt-2">
-                    <a href="#" class="author-comment-link me-3">Like</a>
-
-                    <a href="#" class="author-comment-link">Reply</a>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
 
               <form
                 class="custom-form comment-form mt-4"
-                action="#"
-                method="post"
+                action=""
+                method="POST"
                 role="form"
               >
                 <h6 class="mb-3">Write a comment</h6>
 
                 <textarea
-                  name="comment-message"
+                  name="comment"
                   rows="4"
                   class="form-control"
                   id="comment-message"
                   placeholder="Your comment here"
                 ></textarea>
+                <input type="hidden" name="news_id" value="{{news.id}}" />
 
                 <div class="col-lg-3 col-md-4 col-6 ms-auto">
                   <button type="submit" class="form-control">Comment</button>
                 </div>
+                {% csrf_token %}
               </form>
             </div>
           </div>
