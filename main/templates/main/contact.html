@@ -1,0 +1,101 @@
+{% extends 'main/base.html' %} {% load static %} {% block title %} Pad A Girl
+Child | Contact Us {% endblock title %} {%block content %}
+<section class="contact-section section-padding" id="section_6">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
+        <div class="contact-info-wrap">
+          <h2>Get in touch</h2>
+
+          <div class="contact-image-wrap d-flex flex-wrap">
+            <img
+              src="{% static 'main/images/avatar/pretty-blonde-woman-wearing-white-t-shirt.jpg' %}"
+              class="img-fluid avatar-image"
+              alt=""
+            />
+
+            <div class="d-flex flex-column justify-content-center ms-3">
+              <p class="mb-0">Dama Michael Yohanna</p>
+              <p class="mb-0"><strong>Team Lead & Project Manager.</strong></p>
+            </div>
+          </div>
+
+          <div class="contact-info">
+            <h5 class="mb-3">Contact Infomation</h5>
+
+            <p class="d-flex mb-2">
+              <i class="bi-geo-alt me-2"></i>
+              Computer Science Department Nasarawa State University, Keffi.
+            </p>
+
+            <p class="d-flex mb-2">
+              <i class="bi-telephone me-2"></i>
+
+              <a href="tel: 8160535033"> 8160535033 </a>
+            </p>
+
+            <p class="d-flex">
+              <i class="bi-envelope me-2"></i>
+
+              <a href="mailto:gdscnsukeffi@gmail.com">
+                gdscnsukeffi@gmail.com
+              </a>
+            </p>
+
+            <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-12 mx-auto">
+        <form
+          class="custom-form contact-form"
+          action="/contact"
+          method="POST"
+          role="form"
+        >
+          <h2>Contact form</h2>
+
+          <p class="mb-4">
+            Or, you can just send an email:
+            <b
+              ><a href="mailto:gdscnsukeffi@gmail.com"
+                >gdscnsukeffi@gmail.com</a
+              ></b
+            >
+          </p>
+          <input
+            type="text"
+            name="full_name"
+            id="last-name"
+            class="form-control"
+            placeholder="Full Name"
+            required
+          />
+
+          <input
+            type="email"
+            name="email"
+            id="email"
+            pattern="[^ @]*@[^ @]*"
+            class="form-control"
+            placeholder="Your Email"
+            required
+          />
+
+          <textarea
+            name="message"
+            rows="5"
+            class="form-control"
+            id="message"
+            placeholder="How can we help you?"
+          ></textarea>
+          {% csrf_token %}
+
+          <button type="submit" class="form-control">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock%}

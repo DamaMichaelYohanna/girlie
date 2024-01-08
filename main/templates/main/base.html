@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="Google developer student club..." />
+
+    <title>{% block title %} {% endblock title %}</title>
+
+    <!-- CSS FILES -->
+    <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <link href="{% static 'main/css/bootstrap-icons.css' %}" rel="stylesheet" />
+
+    <link
+      href="{% static 'main/css/templatemo-kind-heart-charity.css' %}"
+      rel="stylesheet"
+    />
+  </head>
+  <body id="section_1">
+    <header class="site-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-12 d-flex flex-wrap">
+            <p class="d-flex me-4 mb-0">
+              <i class="bi-geo-alt me-2"></i>
+              Google Developer Student Club, NSUK, Keffi.
+            </p>
+
+            <p class="d-flex mb-0">
+              <i class="bi-envelope me-2"></i>
+
+              <a href="mailto:info@company.com"> gdscnsukeffi@gmail.com </a>
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+            <ul class="social-icon">
+              <li class="social-icon-item">
+                <a href="#" class="social-icon-link bi-twitter"></a>
+              </li>
+
+              <li class="social-icon-item">
+                <a href="#" class="social-icon-link bi-facebook"></a>
+              </li>
+
+              <li class="social-icon-item">
+                <a href="#" class="social-icon-link bi-instagram"></a>
+              </li>
+
+              <li class="social-icon-item">
+                <a href="#" class="social-icon-link bi-youtube"></a>
+              </li>
+
+              <li class="social-icon-item">
+                <a href="#" class="social-icon-link bi-whatsapp"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <img
+            src="{% static 'main/images/logo.png' %}"
+            class="logo img-fluid"
+            alt="Pad A girl Child"
+          />
+          <span>
+            Save A Girl Child
+            <small>Non-profit Organization</small>
+          </span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#section_3">Causes</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#section_4">Volunteer</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/news">News</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+
+            <li class="nav-item ms-3">
+              <a
+                class="nav-link custom-btn custom-border-btn btn"
+                href="/donate"
+                >Donate</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {%block content %} {% endblock content %}
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-12 mb-4">
+            <img
+              src="{% static 'main/images/logo.png' %}"
+              class="logo img-fluid"
+              alt=""
+            />
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-12 mb-4">
+            <h5 class="site-footer-title mb-3">Quick Links</h5>
+
+            <ul class="footer-menu">
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Our Story</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Newsroom</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Causes</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Become a volunteer</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Partner with us</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-12 mx-auto">
+            <h5 class="site-footer-title mb-3">Contact Infomation</h5>
+
+            <p class="text-white d-flex mb-2">
+              <i class="bi-telephone me-2"></i>
+
+              <a href="tel: +2348160535033" class="site-footer-link">
+                +2348160535033
+              </a>
+            </p>
+
+            <p class="text-white d-flex">
+              <i class="bi-envelope me-2"></i>
+
+              <a href="mailto:gdscnsukeffi@gmail.com" class="site-footer-link">
+                gdscnsukeffi@gmail.com
+              </a>
+            </p>
+
+            <p class="text-white d-flex mt-3">
+              <i class="bi-geo-alt me-2"></i>
+              Computer Science Department, Nasarawa State University, keffi
+            </p>
+
+            <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 col-md-7 col-12">
+              <p class="copyright-text mb-0">
+                Copyright © 2036 <a href="#">Kind Heart</a> Charity Org. Design:
+                <a href="https://templatemo.com" target="_blank">TemplateMo</a
+                ><br />Distribution:
+                <a href="https://themewagon.com">ThemeWagon</a>
+              </p>
+            </div>
+
+            <div
+              class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto"
+            >
+              <ul class="social-icon">
+                <li class="social-icon-item">
+                  <a href="#" class="social-icon-link bi-twitter"></a>
+                </li>
+
+                <li class="social-icon-item">
+                  <a href="#" class="social-icon-link bi-facebook"></a>
+                </li>
+
+                <li class="social-icon-item">
+                  <a href="#" class="social-icon-link bi-instagram"></a>
+                </li>
+
+                <li class="social-icon-item">
+                  <a href="#" class="social-icon-link bi-linkedin"></a>
+                </li>
+
+                <li class="social-icon-item">
+                  <a
+                    href="https://youtube.com/templatemo"
+                    class="social-icon-link bi-youtube"
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="{% static 'main/js/jquery.min.js' %}"></script>
+    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'main/js/jquery.sticky.js' %}"></script>
+    <script src="{% static 'main/js/click-scroll.js' %}"></script>
+    <script src="{% static 'main/js/counter.js' %}"></script>
+    <script src="{% static 'main/js/custom.js' %}"></script>
+  </body>
+</html>
