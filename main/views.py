@@ -76,12 +76,15 @@ def news_detail(request, slug):
                    "comments_count": comments.count()
                    })
 
-def send_email(request):
+def send_email_(request):
     subject = 'Subject of the email'
     message = 'Body of the email.'
-    from_email = 'get2dama11@@gmail.com'
-    recipient_list = ['damaofficial001@gmail.com']
+    from_email = 'get2dama11@gmail.com'
+    recipient_list = ['codewithdama@gmail.com', "damaofficial001@gmail.com"]
 
     send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+    # send_mail(subject,message, from_email, recipient_list,
+    #           fail_silently=False,auth_user="damaofficial001@gmail.com",
+    #           auth_password="bckuwoykzkbsildw")
 
     return render(request, 'email_sent.html')
