@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -33,7 +34,7 @@ def news(request):
     else:
         news_list: News = News.objects.all()
 
-    most_recent: News = news_list[:2]
+    most_recent: News = News.objects.all().order_by('date')[:2]
     items_per_page: int = 1
     paginator: Paginator = Paginator(news_list, items_per_page)
     page = request.GET.get('page')
@@ -50,4 +51,16 @@ def news(request):
 
 def news_detail(request, slug):
     news_object: News = get_object_or_404(News, slug=slug)
-    return render(request, 'main/news-detail.html', {"news": news_object})
+    most_recent: News = News.objects.all().order_by('date')[:2]
+    return render(request, 'main/news-detail.html',
+                  {"news": news_object, "recent_news": most_recent})
+
+def send_email(request):
+    subject = 'Subject of the email'
+    message = 'Body of the email.'
+    from_email = 'get2dama11@@gmail.com'
+    recipient_list = ['damaofficial001@gmail.com']
+
+    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+    return render(request, 'email_sent.html')
