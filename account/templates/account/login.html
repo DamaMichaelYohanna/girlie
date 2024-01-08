@@ -1,10 +1,56 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login page</title>
-</head>
-<body>
-<p>Hello world</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="Google developer student club..." />
+    <!-- CSS FILES -->
+    <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <link href="{% static 'main/css/bootstrap-icons.css' %}" rel="stylesheet" />
+
+    <link
+      href="{% static 'main/css/templatemo-kind-heart-charity.css' %}"
+      rel="stylesheet"
+    />
+    <title>Save A Girl</title>
+  </head>
+  <body>
+    <div class="col-lg-4 col-12 mx-auto" style="margin: 3%">
+      <form
+        class="custom-form contact-form"
+        action="/contact"
+        method="POST"
+        role="form"
+      >
+        <h2>Login Form</h2>
+        <hr />
+        <div style="margin: 5% 0px">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            pattern="[^ @]*@[^ @]*"
+            class="form-control"
+            placeholder="Your Email"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            pattern="[^ @]*@[^ @]*"
+            class="form-control"
+            placeholder="Your Email"
+            required
+          />
+        </div>
+        {% csrf_token %}
+
+        <button type="submit" class="form-control">Send Message</button>
+      </form>
+    </div>
+  </body>
 </html>
