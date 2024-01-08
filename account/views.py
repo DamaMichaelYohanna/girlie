@@ -8,7 +8,6 @@ def login(request):
     if request.method == "POST":
         username:str = request.POST.get("username")
         password:str = request.POST.get("password")
-        print(username, password)
         if username and password:
             user = authenticate(username=username, password=password)
             if user:
