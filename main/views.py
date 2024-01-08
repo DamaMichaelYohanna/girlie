@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -51,24 +52,28 @@ def news(request):
 
 def news_detail(request, slug):
     if request.method == "POST":
-        news_id = request.POST.get("news_id")
-        comment = request.POST.get("comment")
-        news = get_object_or_404(News, pk=news_id)
-        user = request.user
-        if not user:
+        news_id: int = request.POST.get("news_id")  # grab news id from form
+        comment: str = request.POST.get("comment")  # grap comment from form
+        user: User = request.user  # grab user object from request
+        print(news_id, comment, user)
+
+        news: News = get_object_or_404(News, pk=news_id)
+        if user.is_authenticated:
+            comment: Comment = Comment.objects.create(news=news, user=user, comment=comment)
+            comment.save()
+        else:
             messages.info(request, "You to login to comment on news post")
             return redirect(reverse("account:login"))
-        else:
-            comment = Comment.object.create(news=news, user=user, comment=comment)
-    else:
-        news_object: News = get_object_or_404(News, slug=slug)
-        most_recent: News = News.objects.all().order_by('date')[:2]
-        comments = news_object.comments.all()
+
+    news_object: News = get_object_or_404(News, slug=slug)
+    most_recent: News = News.objects.all().order_by('date')[:2]
+    comments = news_object.comments.all()
 
     return render(request, 'main/news-detail.html',
                   {"news": news_object,
                    "recent_news": most_recent,
-                   "comments":comments
+                   "comments":comments,
+                   "comments_count": comments.count()
                    })
 
 def send_email(request):
