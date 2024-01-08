@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from main.forms import ContactUsForm
-from main.models import News
+from main.models import News, Comment
 
 
 def index(request):
@@ -50,10 +50,26 @@ def news(request):
 
 
 def news_detail(request, slug):
-    news_object: News = get_object_or_404(News, slug=slug)
-    most_recent: News = News.objects.all().order_by('date')[:2]
+    if request.method == "POST":
+        news_id = request.POST.get("news_id")
+        comment = request.POST.get("comment")
+        news = get_object_or_404(News, pk=news_id)
+        user = request.user
+        if not user:
+            messages.info(request, "You to login to comment on news post")
+            return redirect(reverse("account:login"))
+        else:
+            comment = Comment.object.create(news=news, user=user, comment=comment)
+    else:
+        news_object: News = get_object_or_404(News, slug=slug)
+        most_recent: News = News.objects.all().order_by('date')[:2]
+        comments = news_object.comments.all()
+
     return render(request, 'main/news-detail.html',
-                  {"news": news_object, "recent_news": most_recent})
+                  {"news": news_object,
+                   "recent_news": most_recent,
+                   "comments":comments
+                   })
 
 def send_email(request):
     subject = 'Subject of the email'
