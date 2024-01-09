@@ -122,6 +122,25 @@
                 >Donate</a
               >
             </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item ms-3">
+              <a
+                class="nav-link custom-btn custom-border-btn btn"
+                href="/user/dasboard"
+                style="background: rgb(213, 205, 205)"
+                >Dashboard</a
+              >
+            </li>
+            {% else %}
+            <li class="nav-item ms-3">
+              <a
+                class="nav-link custom-btn custom-border-btn btn"
+                href="/user/login"
+                style="background: rgb(213, 205, 205)"
+                >Sign In</a
+              >
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>
