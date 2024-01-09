@@ -27,7 +27,7 @@ def logout(request):
 
 def profile(request):
     context = {}
-    return render(request, 'account/profile.html', context)
+    return render(request, 'account/base_dasboard.html', context)
 
 
 def register(request):

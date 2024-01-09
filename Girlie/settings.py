@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account',
+    'user',
     'main',
 
 ]
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'Girlie.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'account', 'templates'),
+        'DIRS': [os.path.join(BASE_DIR, 'user', 'templates'),
                  os.path.join(BASE_DIR, 'main', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -152,4 +152,4 @@ EMAIL_HOST_USER: str = str(os.getenv("EMAIL"))
 EMAIL_HOST_PASSWORD = "vwjtnqeltcegmbqb"
 
 # use custome user model
-AUTH_USER_MODEL = 'account.CustomUser'
+AUTH_USER_MODEL = 'user.User'
