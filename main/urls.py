@@ -8,6 +8,6 @@ urlpatterns = [
     path("contact", views.contact_us, name="contact_us"),
     path("news", views.news, name="news"),
     path("news/<str:slug>", views.news_detail, name="news_details"),
-    path("mail", views.send_email, name="send mail"),
+    path("mail", views.send_email_, name="send mail"),
 
 ]

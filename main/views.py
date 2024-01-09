@@ -63,7 +63,7 @@ def news_detail(request, slug):
             comment.save()
         else:
             messages.info(request, "You to login to comment on news post")
-            return redirect(reverse("account:login"))
+            return redirect(reverse("user:login"))
 
     news_object: News = get_object_or_404(News, slug=slug)
     most_recent: News = News.objects.all().order_by('date')[:2]
