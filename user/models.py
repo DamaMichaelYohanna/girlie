@@ -53,6 +53,8 @@ class Relationship(models.Model):
 
 
 class User(AbstractUser):
+    """Custom user model with additional fields"""
+
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
@@ -61,16 +63,15 @@ class User(AbstractUser):
                 Lower('username'),
                 name='unique_user_username'),
         )
+
     id = models.AutoField(primary_key=True, unique=True, )
-    name = models.CharField(
-        _('name'),
-        max_length=65,
-        blank=True,
-        default=str)
     username = models.CharField(
         _('username'),
         max_length=24,
-        unique=True)
+        unique=True,
+        error_messages={
+            "unique": _("A user with that username already exists."),
+        }, )
 
     following = models.ManyToManyField(
         'self',
@@ -78,47 +79,66 @@ class User(AbstractUser):
         related_name='followers',
         symmetrical=False)
 
-    # def __relates(self, user: Self, status: Union[int, None] = None) -> Relationship:
-    #     if self == user:
-    #         raise Exception(_('A user cannot relates it\'s self'))
-    #     relation, created = Relationship.objects.get_or_create(
-    #         to=user,
-    #         by=self,
-    #         defaults={
-    #             'status': status or Relationship.Status.FOLLOWING,
-    #             'to': user,
-    #             'by': self})
-    #     if not created:
-    #         relation.status = status
-    #         relation.save()
-    #     return relation
+    gender = models.CharField(
+        max_length=7,
+        choices=(
+            ("male", "male"),
+            ("female", "female")
+        ),
+        default="male")
+    picture = models.ImageField(null=True)
+    cover = models.ImageField(null=True)
+    bio = models.CharField(max_length=500, null=True)
+    phone = models.PositiveIntegerField(null=True)
+    address = models.CharField(
+        null=True,
+        max_length=500,
+    )
+    email_verified = models.BooleanField(default=False, )
 
     def follow(self, user: Self) -> Relationship:
-        relation, created = Relationship.objects.get_or_create(
-            to=user,
-            by=self,
-            status=Relationship.Status.FOLLOWING)
-        if created:
-            relation.save()
-        return relation
-
-    def block_user(self, user: Self) -> Relationship:
-        relation, created = Relationship.objects.get_or_create(
+        blocked_relation = Relationship.objects.filter(
             to=user,
             by=self,
             status=Relationship.Status.BLOCKED)
-        if created:
-            relation.save()
-        return relation
+        if blocked_relation:
+            raise ValidationError("Can't follow blocked contact")
+        else:
+            relation, created = Relationship.objects.get_or_create(
+                to=user,
+                by=self,
+                status=Relationship.Status.FOLLOWING)
+            if created:
+                relation.save()
+            return relation
 
     def unfollow(self, user: Self) -> None:
         try:
             relation = Relationship.objects.get(
                 by=self,
-                to=user)
+                to=user,
+                status=Relationship.Status.FOLLOWING
+            )
             relation.delete()
-        except User.DoesNotExist:
+        except Relationship.DoesNotExist:
             raise Exception(_('Relation not found!'))
+
+    def block_user(self, user: Self) -> Relationship:
+        relation, created = Relationship.objects.get_or_create(
+            to=user,
+            by=self)
+        relation.status = Relationship.Status.BLOCKED
+        relation.save()
+        return relation
+
+    def unblock_user(self, user: Self) -> None:
+        relation, created = Relationship.objects.get_or_create(
+            to=user,
+            by=self,
+            status=Relationship.Status.BLOCKED)
+
+        relation.delete()
+        return None
 
     def get_blocked_users(self) -> 'QuerySet[Self]':
         return self.following.filter(
@@ -166,3 +186,12 @@ class User(AbstractUser):
 
     def follows_me(self, user) -> bool:
         return self.followers.filter(id=user.id).exists()
+
+
+class OTP(models.Model):
+    user = models.OneToOneField(
+        User,
+        unique=True,
+        on_delete=models.CASCADE)
+    code = models.UUIDField(unique=True)
+    date = models.DateField(auto_now=True)
