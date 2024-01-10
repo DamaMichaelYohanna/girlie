@@ -18,6 +18,9 @@
     <title>Save A Girl</title>
   </head>
   <body>
+    {% if messages %} {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %} {% endif %}
     <div class="col-lg-4 col-12 mx-auto" style="margin: 3%">
       <form
         class="custom-form contact-form"
